@@ -3,7 +3,7 @@
 =============
   * 這是一個簡易的爬蟲程式
   * 本爬蟲程式包含三個區域人數及文章分析
-         >![Alt text](/threeblocks.jpg)
+         >![Alt text](/threeblocks.png)
 
   * 揚子中學網站:[Link](http://www.ytjh.ylc.edu.tw/)
   * 執行環境:Anaconda 3
