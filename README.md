@@ -7,6 +7,7 @@
 
   * 揚子中學網站:[Link](http://www.ytjh.ylc.edu.tw/)
   * 執行環境:Anaconda 3
+  * 爬蟲套件:BeautifulSoup
   * 執行.py檔後會自動產生圖表分析(檔名預設png)
 
 爬蟲過程說明

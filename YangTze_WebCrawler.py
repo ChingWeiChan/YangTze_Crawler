@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-擷取:榮譽榜
+擷取:揚子高級中學網頁
 @author: Chan Ching-Wei
 """
 import requests,re,time
@@ -9,32 +9,30 @@ import matplotlib.font_manager
 from bs4 import BeautifulSoup
 import numpy as np
 
-
-#ArticleTitle=[]
 name=["三大版塊","校園新鮮事","訊息公告","榮譽榜"]
 total_Article={}
 total_Click={}
-area_Click={"校園新鮮事":0,"訊息公告":0,"榮譽榜":0}   #k可作為判斷哪一區域的標準
-area_Article={"校園新鮮事":0,"訊息公告":0,"榮譽榜":0} #k可作為判斷哪一區域的標準
+area_Click={"校園新鮮事":0,"訊息公告":0,"榮譽榜":0}   #迴圈變數k可作為判斷哪一區域的標準
+area_Article={"校園新鮮事":0,"訊息公告":0,"榮譽榜":0} #迴圈變數k可作為判斷哪一區域的標準
 def show_data(data,article,name):
     #統計圖
     matplotlib.font_manager.findSystemFonts(fontpaths=None)
     plt.rcParams["font.family"]="Microsoft JhengHei"
-    #x=np.arange(len(list(data.values())))+1
+
     if name=="校園新鮮事":
         Magnification_start=4000
         Magnification_end=100000
         width_len=70000
         dis=4000
-        plt.rc('xtick', labelsize=7) 
-        
+        plt.rc('xtick', labelsize=7)
+
     elif name=="訊息公告":
         Magnification_start=4000
         Magnification_end=100000
         width_len=70000
         dis=4000
-        plt.rc('xtick', labelsize=7) 
-        
+        plt.rc('xtick', labelsize=7)
+
     elif name=="榮譽榜":
         Magnification_start=2
         Magnification_end=25
@@ -50,8 +48,8 @@ def show_data(data,article,name):
         Magnification_end=100000
         width_len=70000
         dis=4000
-        plt.rc('xtick', labelsize=7) 
-        
+        plt.rc('xtick', labelsize=7)
+
     int_list=[]
     for i in data.keys():
         int_list.append(int(data[i]))
@@ -63,14 +61,14 @@ def show_data(data,article,name):
         end=len(list(data.values()))*Magnification_end   #刻度設定
     xticks=np.linspace(start,end,len(list(data.values()))) #設定x軸刻度範圍及座標
     plt.xticks(xticks,rotation=40)   #設定x軸刻度範圍及座標 (Rotation:X軸座標的角度)
-    plt.xlim(0,end+len(list(data.values()))*dis) 
+    plt.xlim(0,end+len(list(data.values()))*dis)
     if article==True:
         plt.ylim(0,int(max(int_list))+30)
         k=2
         classification="各處室文章總數"
         text_size=8
     else:
-        plt.ylim(0,int(max(int_list))+10000)#文章跟點閱率的範圍與大小設定
+        plt.ylim(0,int(max(int_list))+10000) #文章跟點閱率的範圍與大小設定
         if name=="三各版塊" or name=="三大版塊":
             k=3000
         else:
@@ -78,11 +76,11 @@ def show_data(data,article,name):
         classification="各處室網頁點閱總人數"
         text_size=5
     if name=="三各版塊": classification+='之總和'
-    
+
     plt.bar(xticks,int_list,align='center',tick_label=list(data.keys()),width=width_len)
-    
-    #plt.rc('ytick', labelsize=20) 
-    
+
+
+
     j=start
     plt.title("%s 揚子中學%s%s" %(time.strftime("%m/%d"),name,classification))
     for i in list(data.values()):
@@ -111,47 +109,37 @@ for k in range(1,4):
             if Department =='' : continue #發現有單位為空白，不列入計算
             ClickRate=re.compile('\d+').search(data3[data]).group()
             try:
-            
+
                 ClickDict[Department]=int(ClickRate)+int(ClickDict[Department])
                 ArticleDict[Department]=int(ArticleDict[Department])+1
                 
             except:
-                
+
                 ClickDict[Department]=ClickRate
                 ArticleDict[Department]=1
-                             
-                
+
+
             try:
                 total_Click[Department]=int(total_Click[Department])+int(ClickRate)
                 total_Article[Department]=int(total_Article[Department])+1
             except:
                 total_Click[Department]=ClickRate
                 total_Article[Department]=1
-            
-                          
+
+
         i+=1
     for j in ClickDict.keys():
-        area_Click["%s"%name[k]]=int(ClickDict[j])+int(area_Click["%s"%name[k]])        
+        area_Click["%s"%name[k]]=int(ClickDict[j])+int(area_Click["%s"%name[k]])
         area_Article["%s"%name[k]]=int(ArticleDict[j])+int(area_Article["%s"%name[k]])
         print("{} 觀看人數:{}   文章數量:{}\n".format(j,ClickDict[j],ArticleDict[j]))
-    
+
     show_data(ClickDict,False,name[k])
     show_data(ArticleDict,True,name[k])
-    
-    
+
+
 
 show_data(total_Click,False,name[0])
 show_data(total_Article,True,name[0])
 show_data(area_Click,False,"三各版塊")
 show_data(area_Article,True,"三各版塊")
 #show_data(ClickDict,False,name[3])
-
-    
-    
-        
-       
- 
- 
-
-
-
