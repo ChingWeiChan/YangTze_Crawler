@@ -1,6 +1,7 @@
 
 '''
-This is the file which print the fonts in matplotlib library.
+This is the file which can print the fonts in matplotlib library.
+And solve the Chinese Fonts cannot appear normally in plot.
 You need to Download the Chinese fonts.
 Step 1:
 Download the file to /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/matplotlib/mpl-data/fonts/ttf
