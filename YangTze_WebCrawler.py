@@ -11,9 +11,10 @@ from bs4 import BeautifulSoup
 import numpy as np
 
 #Chinese fonts
-plt.rcParams['font.family']=['Noto Sans CJK TC']
+# Read the file Find_matplotlib_CHineseFonts.py
+plt.rcParams['font.family'] = 'Noto Sans CJK TC'
 
-name = ["三版塊加總", "校園新鮮事", "訊息公告", "榮譽榜"]
+name = ["三大版塊", "校園新鮮事", "訊息公告", "榮譽榜"]
 total_Article = {}
 total_Click = {}
 area_Click = {"校園新鮮事": 0, "訊息公告": 0, "榮譽榜": 0}  # 迴圈變數k可作為判斷哪一區域的標準
@@ -62,8 +63,8 @@ def show_data(data, article, name):
         start = 0.5
         end = 3
     else:
-        start = len(list(data.values())) * Magnification_start  # 刻度設定
-        end = len(list(data.values())) * Magnification_end  # 刻度設定
+        start = Magnification_start * len(list(data.values()))   # 刻度設定
+        end = Magnification_end * len(list(data.values()))   # 刻度設定
     xticks = np.linspace(start, end, len(list(data.values())))  # 設定x軸刻度範圍及座標
     plt.xticks(xticks, rotation=40)  # 設定x軸刻度範圍及座標 (Rotation:X軸座標的角度)
     plt.xlim(0, end+len(list(data.values()))*dis)
